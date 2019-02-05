@@ -6,5 +6,6 @@ const dbURI = `mongodb://${SERVER}:${DBPORT}/${DATABASE}`
 
 module.exports = {
   'secret': process.env.SECRET,
-  'database': dbURI
+  'database': dbURI,
+  'tokenExpirationTime': process.env.TOKEN_EXPIRATION_TIME
 }

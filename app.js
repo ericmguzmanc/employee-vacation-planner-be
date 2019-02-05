@@ -4,12 +4,9 @@ const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
-const initializeDatabase = require('./database')
-
-const config = require('./config')
-
-const userRoutes = require('./app/routes/user.routes')
-const authenticateRoutes = require('./app/auth/authenticate')
+const initializeDatabase = require('./app/db/index.js')
+const config = require('./app/config/config')
+const appRoutes = require('./app/routes')
 
 app.set('superSecret', config.secret) // Secret variable
 
@@ -20,10 +17,8 @@ app.use(bodyParser.json())
 // log requests to the console
 app.use(morgan('dev'))
 
-
 // Routes
-app.use('/api', authenticateRoutes);
-app.use('/api', userRoutes);
+app.use(appRoutes);
 
 
 const startServer = async () => {

@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   }
 });
 
-UserSchema.pre('validate', function(next) {
+UserSchema.pre('save', function(next) {
   const user = this
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) { 
@@ -54,10 +54,6 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
     })
   })
   return compare
-}
-
-UserSchema.methods.validatePassword = async function validatePassword(data) {
-  return bcrypt.compare(data, this.password)
 }
 
 module.exports = mongoose.model('User', UserSchema)
