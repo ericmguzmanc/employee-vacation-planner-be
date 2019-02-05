@@ -17,7 +17,6 @@ const EmployeeSchema = new Schema({
   },
   employeeCode: {
     type: Number,
-    // required: true
   },
   employeeMail: {
     type: String,

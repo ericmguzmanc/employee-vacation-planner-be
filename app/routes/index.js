@@ -7,9 +7,6 @@ const AuthController = require('./controllers/auth');
 const UserController = require('./controllers/user');
 const EmployeeController = require('./controllers/employee')
 
-
-
-
 router.get('/setup', UserController.userSetup);
 
 // User
