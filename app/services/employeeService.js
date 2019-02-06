@@ -7,8 +7,7 @@ async function getAllEmployees() {
       .catch(err => reject(err));
   });
 
-  const response = await promise;
-  return response;
+  return await promise;
 
 }
 
@@ -22,8 +21,7 @@ async function getEmployee(req) {
       .catch(err => reject(err));
   });
 
-  const response = await promise;
-  return response;
+  return await promise;;
 }
 
 // Saves or updates an Employee
@@ -33,7 +31,7 @@ async function saveEmployee(req) {
     name: req.body.name,
     lastName: req.body.lastName,
     title: req.body.title || null,
-    // employeeCode: EmployeeModel.employeeCode,
+    hireDate: req.body.hireDate || new Date(),
     employeeMail: req.body.employeeMail,
     employeePhoto: req.body.employeePhoto || null,
     vacationActive: req.body.vacationActive || false,
@@ -55,8 +53,7 @@ async function saveEmployee(req) {
     })
   });
 
-  const response = await promise;
-  return response;
+  return await promise;
 }
 
 async function updateEmployee(req) {
@@ -65,7 +62,7 @@ async function updateEmployee(req) {
     name: req.body.name,
     lastName: req.body.lastName,
     title: req.body.title || null,
-    // employeeCode: req.body.employeeCode,
+    hireDate: req.body.hireDate || new Date(),
     employeeMail: req.body.employeeMail,
     employeePhoto: req.body.employeePhoto || null,
     vacationActive: req.body.vacationActive || false,
@@ -95,8 +92,7 @@ async function updateEmployee(req) {
     })
   });
 
-  const response = await promise;
-  return response;
+  return await promise;
 }
 
 async function deleteEmployee (req) {
@@ -119,8 +115,7 @@ async function deleteEmployee (req) {
     });
   });
 
-  const resolve = await promise;
-  return resolve;
+  return await promise;
 }
 
 module.exports = {

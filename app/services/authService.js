@@ -4,14 +4,14 @@ const config = require('../config/config');
 
 
 async function authenticateUser(req, res) {
-  if(!req.body.name) {
-    return res.status(400).send('Missing URL parameter: name')
+  if(!req.body.email) {
+    return res.status(400).send('Missing URL parameter: email')
   }
   
   const promise = new Promise((resolve, reject) => {
     // find the user
     UserModel.findOne({
-      name: req.body.name
+      email: req.body.email
     })
     .then(user => {
       if (!user) {
@@ -48,8 +48,7 @@ async function authenticateUser(req, res) {
     .catch(err => reject(err));
   });
   
-  const response = await promise;
-  return response;
+  return await promise;
 }
 
 async function validateToken(req, next) {
@@ -81,8 +80,7 @@ async function validateToken(req, next) {
     }
   })
 
-  const response = await promise;
-  return response;
+  return await promise;
 }
 
 module.exports = {

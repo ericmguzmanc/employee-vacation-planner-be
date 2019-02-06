@@ -12,6 +12,7 @@ router.get('/setup', UserController.userSetup);
 // User
 router.post('/auth/user', AuthMiddleware.validateToken, AuthController.authenticateUser);
 router.get('/api/user', AuthMiddleware.validateToken, UserController.getAllUsers);
+router.post('/signup', UserController.register);
 
 // Employee
 router.get('/api/employee', AuthMiddleware.validateToken, EmployeeController.getAllEmployees);

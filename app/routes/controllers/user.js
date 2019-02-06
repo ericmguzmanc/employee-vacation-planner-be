@@ -1,7 +1,7 @@
 const UserService = require('../../services/userService')
 
-async function userSetup (req, res) {
-  await UserService.createUser(req)
+function userSetup (req, res) {
+  UserService.createUser(req)
     .then(doc => {
       if (!doc || doc.length === 0) {
         return res.status(500).send(doc)
@@ -15,8 +15,14 @@ async function userSetup (req, res) {
     })
 }
 
-async function getAllUsers (req, res) {
-  await UserService.getAllUsers()
+function register(req, res) {
+  UserService.createUser(req.body)
+    .then((doc) => res.json(doc))
+    .catch((err) => res.json(err));
+}
+
+function getAllUsers (req, res) {
+  UserService.getAllUsers()
     .then(docs => {
       res.json(docs)
     })
@@ -27,5 +33,6 @@ async function getAllUsers (req, res) {
 
 module.exports = {
   userSetup,
-  getAllUsers
+  getAllUsers,
+  register
 }

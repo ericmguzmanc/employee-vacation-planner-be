@@ -22,6 +22,10 @@ const EmployeeSchema = new Schema({
     type: String,
     required: true
   },
+  hireDate: {
+    type: Date,
+    required: true
+  },
   employeePhoto: {
     type: String
   },

@@ -1,34 +1,33 @@
 const EmployeeService = require('../../services/employeeService');
 
-async function getAllEmployees(req, res) {
-  await EmployeeService.getAllEmployees()
-      .then(docs => res.json(docs))
-      .catch(err => res.json(err));
+function getAllEmployees(req, res) {
+  EmployeeService.getAllEmployees()
+    .then(docs => res.json(docs))
+    .catch(err => res.json(err));
 }
 
-async function getEmployeeById(req, res) {
-  await EmployeeService.getEmployee(req)
-      .then(doc => res.json(doc))
-      .catch(err => res.json(err));
+function getEmployeeById(req, res) {
+  EmployeeService.getEmployee(req)
+    .then(doc => res.json(doc))
+    .catch(err => res.json(err));
 }
 
-async function saveEmployee(req, res) {
-  await EmployeeService.saveEmployee(req)
-      .then(doc => res.json(doc))
-      .catch(err => res.json(err));
+function saveEmployee(req, res) {
+  EmployeeService.saveEmployee(req)
+    .then(doc => res.json(doc))
+    .catch(err => res.json(err));
 }
 
-async function updateEmployee(req, res) {
-  await EmployeeService.updateEmployee(req)
-      .then(doc => res.json(doc))
-      .catch(err => res.json(err))
+function updateEmployee(req, res) {
+  EmployeeService.updateEmployee(req)
+    .then(doc => res.json(doc))
+    .catch(err => res.json(err))
 }
 
-async function deleteEmployee(req, res) {
-  await EmployeeService.deleteEmployee(req)
-      .then(doc => res.json(doc))
-      .catch(err => res.json(err));
-  
+function deleteEmployee(req, res) {
+  EmployeeService.deleteEmployee(req)
+    .then(doc => res.json(doc))
+    .catch(err => res.json(err));
 }
 
 module.exports = {

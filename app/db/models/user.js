@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-nodejs')
-const SALT_WORK_FACTOR = 10
+const bcrypt = require('bcrypt-nodejs');
+const SALT_WORK_FACTOR = 10;
+const CounterModel = require('./counter');
 
 const UserSchema = new Schema({
-  name: {
+ 
+  email: {
     type: String,
     required: true,
     index: { unique: true}
@@ -20,7 +22,8 @@ const UserSchema = new Schema({
 });
 
 UserSchema.pre('save', function(next) {
-  const user = this
+  const user = this;
+  
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) { 
     return next()
