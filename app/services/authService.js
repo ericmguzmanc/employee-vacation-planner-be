@@ -30,7 +30,11 @@ async function authenticateUser(req, res) {
               // if user is found and password is right
               // create a token with only our given payload
               // we don't want to pass in the entire user since that has the password
-              const payload = { admin: user.admin }
+              const payload = { 
+                _id: user._id,
+                email: user.email,
+                admin: user.admin 
+              }
               const token = jwt.sign(payload, config.secret, {
                 expiresIn: config.tokenExpirationTime // expires in 24 hours
               })

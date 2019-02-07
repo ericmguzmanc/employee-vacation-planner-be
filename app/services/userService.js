@@ -2,24 +2,11 @@ const UserModel = require('../db/models/user')
 
 
 async function createUser(params) {
-  // create a sample user
-  // const User = new UserModel({
-  //   name: 'Juan Perez2',
-  //   password: 'password2',
-  //   admin: true
-  // });
-
-  // const promise = new Promise((resolve, reject) => {
-  //   // save the sample user
-  //   User.save().excec
-  //     .then(doc => resolve(doc))
-  //     .catch(err => reject(err));
-  // });
-
   // return await promise;
   const User = new UserModel({
     email: params.email,
     password: params.password,
+    name: params.name || null,
     admin: true,
   });
   
