@@ -10,7 +10,7 @@ const EmployeeController = require('./controllers/employee')
 router.get('/setup', UserController.userSetup);
 
 // User
-router.post('/auth/user', AuthMiddleware.validateToken, AuthController.authenticateUser);
+router.post('/auth/user', AuthController.authenticateUser);
 router.get('/api/user', AuthMiddleware.validateToken, UserController.getAllUsers);
 router.post('/signup', UserController.register);
 
