@@ -16,7 +16,7 @@ async function authenticateUser(req, res) {
     .then(user => {
       if (!user) {
         // res.json({ success: false, message: 'Authentication failed. User not found.' })
-        resolve({ success: false, message: 'Authentication failed. User not found.' });
+        reject({ success: false, message: 'Authentication failed. User not found.' });
       } else if (user) {
   
         // check if password matches
@@ -24,7 +24,7 @@ async function authenticateUser(req, res) {
           .then(isMatch => {
             if (!isMatch) {
               // res.json({ success: false, message: 'Authentication failed. Wrong password.'})
-              resolve({ success: false, message: 'Authentication failed. Wrong password.'})
+              reject({ success: false, message: 'Authentication failed. Wrong password.'})
             } else {
             
               // if user is found and password is right
@@ -43,7 +43,12 @@ async function authenticateUser(req, res) {
               resolve({
                 success: true,
                 message: 'Token created!',
-                token: token
+                data: {
+                  token: token,
+                  id: user._id,
+                  email: user.email,
+                  admin: user.admin
+                }
               })
             }
           })
@@ -66,9 +71,9 @@ async function validateToken(req, next) {
       jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {
           if (err.TokenExpiredError) {
-            resolve({ success: false, message: 'Token Expired' })
+            reject({ success: false, message: 'Token Expired' })
           }
-            resolve({ success: false, message: 'Failed to authenticate token.' })
+            reject({ success: false, message: 'Failed to authenticate token.' })
         }
         // if everything is good, save to request for use in other routes
         req.decoded = decoded
