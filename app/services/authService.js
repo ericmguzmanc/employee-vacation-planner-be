@@ -3,7 +3,7 @@ const UserModel = require('../db/models/user');
 const config = require('../config/config');
 
 
-async function authenticateUser(req, res) {
+function authenticateUser(req, res) {
   if(!req.body.email) {
     return res.status(400).send('Missing URL parameter: email')
   }
@@ -38,7 +38,7 @@ async function authenticateUser(req, res) {
               const token = jwt.sign(payload, config.secret, {
                 expiresIn: config.tokenExpirationTime // expires in 24 hours
               })
-              
+
               // return information including token as JSON
               resolve({
                 success: true,
@@ -57,10 +57,10 @@ async function authenticateUser(req, res) {
     .catch(err => reject(err));
   });
   
-  return await promise;
+  return promise;
 }
 
-async function validateToken(req, next) {
+function validateToken(req, next) {
 
   const token = req.body.token || req.query.token || req.headers['x-access-token']
 
@@ -68,16 +68,20 @@ async function validateToken(req, next) {
     // decode token
     if (token) {
       // verifies secret and checks exp
+
       jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {
           if (err.TokenExpiredError) {
             reject({ success: false, message: 'Token Expired' })
-          }
+          } 
             reject({ success: false, message: 'Failed to authenticate token.' })
+        } else {
+
+          // if everything is good, save to request for use in other routes
+          req.decoded = decoded
+          next()
         }
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded
-        next()
+
       })
     } else {
       // if there is no token
@@ -89,7 +93,7 @@ async function validateToken(req, next) {
     }
   })
 
-  return await promise;
+  return promise;
 }
 
 module.exports = {
