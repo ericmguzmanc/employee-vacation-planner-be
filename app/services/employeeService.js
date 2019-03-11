@@ -1,17 +1,17 @@
 const EmployeeModel = require('../db/models/employee');
 
-async function getAllEmployees() {
+function getAllEmployees() {
   const promise = new Promise((resolve, reject) => {
     EmployeeModel.find({ employeeActive: true })
       .then(doc => resolve(doc))
       .catch(err => reject(err));
   });
 
-  return await promise;
+  return promise;
 
 }
 
-async function getEmployee(req) {
+function getEmployee(req) {
 
   query = { employeeCode: req.params.employeeCode }
 
@@ -21,11 +21,11 @@ async function getEmployee(req) {
       .catch(err => reject(err));
   });
 
-  return await promise;;
+  return promise;;
 }
 
 // Saves or updates an Employee
-async function saveEmployee(req) {
+function saveEmployee(req) {
 
   const Employee = new EmployeeModel({
     name: req.body.name,
@@ -53,10 +53,10 @@ async function saveEmployee(req) {
     })
   });
 
-  return await promise;
+  return promise;
 }
 
-async function updateEmployee(req) {
+function updateEmployee(req) {
   const Employee = 
     {
     name: req.body.name,
@@ -92,10 +92,10 @@ async function updateEmployee(req) {
     })
   });
 
-  return await promise;
+  return promise;
 }
 
-async function deleteEmployee (req) {
+function deleteEmployee (req) {
   const query = { employeeCode: req.params.employeeCode };
   const update = { employeeActive: false };
   const options = { new: true };
@@ -115,7 +115,7 @@ async function deleteEmployee (req) {
     });
   });
 
-  return await promise;
+  return promise;
 }
 
 module.exports = {
