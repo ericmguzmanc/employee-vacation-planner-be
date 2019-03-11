@@ -7,7 +7,6 @@ mongoose.connection.on('connected', () => {
 })
 
 mongoose.connection.on('error', (err) => {
-  console.log(dbURI)
   console.log('Mongoose default connection error: ', err);
 })
 
